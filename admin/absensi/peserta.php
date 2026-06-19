@@ -5,16 +5,20 @@ session_start();
 include '../../config/koneksi.php';
 
 if(!isset($_SESSION['login'])){
-    header("Location:../login.php");
+    header("Location: ../login.php");
     exit();
 }
 
 if(!isset($_GET['id'])){
-    header("Location:index.php");
+    header("Location: index.php");
     exit();
 }
 
 $id = (int)$_GET['id'];
+
+/* =========================
+   DATA KEGIATAN
+========================= */
 
 $kegiatan = mysqli_query(
     $conn,
@@ -25,22 +29,57 @@ $kegiatan = mysqli_query(
 
 $dataKegiatan = mysqli_fetch_assoc($kegiatan);
 
-// Jika data kegiatan tidak ditemukan
+/* Jika kegiatan tidak ditemukan */
 if(!$dataKegiatan){
-    echo "<script>alert('Kegiatan tidak ditemukan!'); window.location='index.php';</script>";
+
+    echo "
+    <script>
+        alert('Kegiatan tidak ditemukan!');
+        window.location='index.php';
+    </script>
+    ";
+
     exit();
 }
+
+/* =========================
+   TOTAL PESERTA
+========================= */
+
+$totalPeserta = mysqli_fetch_assoc(
+
+    mysqli_query(
+
+        $conn,
+
+        "SELECT COUNT(*) AS total
+        FROM absensi
+        WHERE kegiatan_id='$id'"
+
+    )
+
+)['total'];
+
+/* =========================
+   DATA PESERTA
+========================= */
 
 $peserta = mysqli_query(
     $conn,
     "SELECT
     absensi.*,
     anggota.nama,
-    anggota.divisi
+    anggota.divisi,
+    anggota.nim,
+    anggota.jurusan
+
     FROM absensi
+
     JOIN anggota
     ON absensi.anggota_id = anggota.id
+
     WHERE absensi.kegiatan_id='$id'
+
     ORDER BY absensi.waktu_absen ASC"
 );
 
@@ -328,6 +367,57 @@ $peserta = mysqli_query(
         font-size:15px;
     }
 }
+
+.stat-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.05);
+
+}
+
+.stat-card h2{
+
+    font-size:40px;
+
+    font-weight:700;
+
+    color:#001F54;
+
+}
+
+.foto-bukti{
+
+    width:60px;
+    height:60px;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+    transition:.3s;
+}
+
+.foto-bukti:hover{
+
+    transform:scale(1.08);
+
+}
+
+.modal-content{
+
+    border-radius:20px;
+
+    border:none;
+
+}
     </style>
 </head>
 <body>
@@ -351,54 +441,181 @@ $peserta = mysqli_query(
         <div class="table-responsive mb-4" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
             <table class="table" style="min-width: 100%;">
                 <thead>
-                    <tr>
-                        <th class="col-no">No</th>
-                        <th>Nama Anggota</th>
-                        <th class="col-divisi-desktop">Divisi</th>
-                        <th>Foto Bukti</th>
-                        <th>Waktu Absen</th>
-                    </tr>
+
+                <tr>
+
+                <th>Nama</th>
+
+                <th>NIM</th>
+
+                <th>Jurusan</th>
+
+                <th>Divisi</th>
+
+                <th>Pesan & Kesan</th>
+
+                <th>Foto</th>
+
+                <th>Waktu</th>
+
+                </tr>
+
                 </thead>
                 <tbody>
-    <?php
-    $no = 1;
-    while($row = mysqli_fetch_assoc($peserta)){
-    ?>
+
+<?php if(mysqli_num_rows($peserta) > 0){ ?>
+
+    <?php while($row = mysqli_fetch_assoc($peserta)){ ?>
+
     <tr>
-        <td class="col-no"><?= $no++; ?></td>
+
         <td>
-            <!-- Nama Anggota (Sudah bersih tanpa info divisi di bawahnya) -->
-            <span class="d-block fw-semibold" style="color: #2b3674; font-size: 14px; margin-bottom: 2px;">
-                <?= htmlspecialchars($row['nama']); ?>
+            <?= htmlspecialchars($row['nama'] ?? '-'); ?>
+        </td>
+
+        <td>
+            <?= htmlspecialchars($row['nim'] ?? '-'); ?>
+        </td>
+
+        <td>
+            <?= htmlspecialchars($row['jurusan'] ?? '-'); ?>
+        </td>
+
+        <td>
+            <span class="badge bg-light text-secondary border">
+                <?= htmlspecialchars($row['divisi'] ?? '-'); ?>
             </span>
         </td>
-        
-        <!-- Kolom Divisi Utama (Tetap dipertahankan) -->
-        <td class="col-divisi-desktop">
-            <span class="badge bg-light text-secondary border px-3 py-2" style="border-radius: 8px; font-weight: 500; font-size: 13px;">
-                <?= htmlspecialchars($row['divisi']); ?>
-            </span>
-        </td>
-        
+
         <td>
-            <a href="../../assets/upload_absensi/<?php echo $row['foto']; ?>" target="_blank">
-                <img src="../../assets/upload_absensi/<?php echo $row['foto']; ?>" class="foto-bukti" alt="Bukti">
+
+            <?php if(!empty($row['pesan_kesan'])){ ?>
+
+            <button
+                class="btn btn-info btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#modal<?= $row['id']; ?>">
+
+                <i class="bi bi-chat-left-text"></i>
+                Lihat
+
+            </button>
+
+            <?php } else { ?>
+
+            <span class="badge bg-secondary">
+                Tidak Ada
+            </span>
+
+            <?php } ?>
+
+        </td>
+
+        <td>
+
+            <?php if(!empty($row['foto'])){ ?>
+
+            <a
+                href="../../assets/upload_absensi/<?= $row['foto']; ?>"
+                target="_blank">
+
+                <img
+                    src="../../assets/upload_absensi/<?= $row['foto']; ?>"
+                    class="foto-bukti"
+                    alt="Foto Bukti">
+
             </a>
+
+            <?php } else { ?>
+
+            <span class="text-muted">
+                Tidak ada foto
+            </span>
+
+            <?php } ?>
+
         </td>
-        
+
         <td>
-            <small class="text-muted fw-semibold" style="font-size: 12px; display: block; white-space: nowrap;">
-                <?= htmlspecialchars($row['waktu_absen']); ?>
-            </small>
+            <?= htmlspecialchars($row['waktu_absen'] ?? '-'); ?>
         </td>
+
     </tr>
+
+    <!-- MODAL PESAN KESAN -->
+
+    <div
+        class="modal fade"
+        id="modal<?= $row['id']; ?>"
+        tabindex="-1">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header bg-primary text-white">
+
+                    <h5 class="modal-title">
+
+                        <i class="bi bi-chat-left-text-fill me-2"></i>
+                        Pesan & Kesan Peserta
+
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="mb-2">
+
+                        <strong>Nama :</strong>
+                        <?= htmlspecialchars($row['nama'] ?? '-'); ?>
+
+                    </div>
+
+                    <hr>
+
+                    <p style="white-space:pre-line;">
+
+                        <?= htmlspecialchars($row['pesan_kesan'] ?? 'Belum ada pesan & kesan.'); ?>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
     <?php } ?>
-    
-    <?php if(mysqli_num_rows($peserta) == 0) { ?>
-    <tr>
-        <td colspan="5" class="text-center text-muted py-4">Belum ada peserta yang melakukan absensi.</td>
-    </tr>
-    <?php } ?>
+
+<?php } else { ?>
+
+<tr>
+
+    <td colspan="7" class="text-center text-muted py-5">
+
+        <i
+            class="bi bi-inbox"
+            style="font-size:40px;display:block;margin-bottom:10px;">
+        </i>
+
+        Belum ada peserta yang melakukan absensi.
+
+    </td>
+
+</tr>
+
+<?php } ?>
+
 </tbody>
 
             </table>
@@ -407,7 +624,7 @@ $peserta = mysqli_query(
         <!-- TOMBOL KEMBALI DAN EXCEL (GAYA LANGSUNG / INLINE CSS) -->
 <div class="action-top-group">
 
-    <a href="../dashboard.php" class="btn-nav btn-back">
+    <a href="hapus.php" class="btn-nav btn-back">
         <i class="bi bi-arrow-left-circle-fill"></i>
 
         <div class="text-group">
@@ -428,6 +645,40 @@ $peserta = mysqli_query(
 </div>
 
 </div>
+
+<script>
+
+document
+.getElementById('searchInput')
+.addEventListener('keyup', function(){
+
+let value =
+this.value.toLowerCase();
+
+let rows =
+document.querySelectorAll(
+'tbody tr'
+);
+
+rows.forEach(row=>{
+
+row.style.display =
+row.innerText
+.toLowerCase()
+.includes(value)
+
+? ''
+
+: 'none';
+
+});
+
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
 

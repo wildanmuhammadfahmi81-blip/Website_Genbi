@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-
 include '../../config/koneksi.php';
 
 $id = $_GET['id'];
@@ -18,18 +17,16 @@ $kegiatan = mysqli_fetch_assoc(
 $data = mysqli_query(
     $conn,
     "SELECT
-    absensi.*,
-    anggota.nama,
-    anggota.divisi
-
+        absensi.*,
+        anggota.nama,
+        anggota.nim,
+        anggota.jurusan,
+        anggota.divisi
     FROM absensi
-
     JOIN anggota
     ON absensi.anggota_id = anggota.id
-
     WHERE absensi.kegiatan_id='$id'
-
-    ORDER BY waktu_absen ASC"
+    ORDER BY absensi.waktu_absen ASC"
 );
 
 $totalPeserta = mysqli_num_rows($data);
@@ -46,75 +43,56 @@ header("Content-Disposition: attachment; filename=Laporan_Absensi_".$kegiatan['n
 
 <body>
 
-<table border="0">
-
+<table border="0" width="100%">
 <tr>
-<td colspan="6" align="center">
-<h2>GENBI UIN SSC</h2>
-</td>
+    <td colspan="8" align="center">
+        <h2>GENERASI BARU INDONESIA (GENBI)</h2>
+        <h3>UIN SYEKH NURJATI CIREBON</h3>
+        <h4>LAPORAN ABSENSI KEGIATAN</h4>
+    </td>
 </tr>
-
-<tr>
-<td colspan="6" align="center">
-<h3>LAPORAN ABSENSI KEGIATAN</h3>
-</td>
-</tr>
-
 </table>
+
+<hr>
 
 <br>
 
 <table border="0">
-
 <tr>
-<td><b>Nama Kegiatan</b></td>
-<td>: <?php echo $kegiatan['nama_kegiatan']; ?></td>
+    <td><b>Nama Kegiatan</b></td>
+    <td>: <?php echo $kegiatan['nama_kegiatan']; ?></td>
 </tr>
 
 <tr>
-<td><b>Tanggal</b></td>
-<td>: <?php echo $kegiatan['tanggal']; ?></td>
+    <td><b>Tanggal</b></td>
+    <td>: <?php echo date('d F Y', strtotime($kegiatan['tanggal'])); ?></td>
 </tr>
 
 <tr>
-<td><b>Total Peserta</b></td>
-<td>: <?php echo $totalPeserta; ?> Orang</td>
+    <td><b>Total Peserta</b></td>
+    <td>: <?php echo $totalPeserta; ?> Orang</td>
 </tr>
-
 </table>
 
 <br>
 
-<table border="1" cellpadding="8" cellspacing="0">
+<table border="1" cellspacing="0" cellpadding="6">
 
 <tr style="
-background:#001F54;
+background:#0A3278;
 color:white;
 font-weight:bold;
 text-align:center;
 ">
 
-<th width="50">No</th>
-
-<th width="250">
-Nama
-</th>
-
-<th width="180">
-Divisi
-</th>
-
-<th width="180">
-Waktu Absen
-</th>
-
-<th width="120">
-Status
-</th>
-
-<th width="200">
-Bukti Foto
-</th>
+<th>No</th>
+<th>Nama</th>
+<th>NIM</th>
+<th>Jurusan</th>
+<th>Divisi</th>
+<th>Pesan & Kesan</th>
+<th>Waktu Absen</th>
+<th>Status</th>
 
 </tr>
 
@@ -124,7 +102,7 @@ $no = 1;
 
 mysqli_data_seek($data,0);
 
-while($row=mysqli_fetch_assoc($data)){
+while($row = mysqli_fetch_assoc($data)){
 
 ?>
 
@@ -139,7 +117,19 @@ while($row=mysqli_fetch_assoc($data)){
 </td>
 
 <td>
+<?php echo !empty($row['nim']) ? $row['nim'] : '-'; ?>
+</td>
+
+<td>
+<?php echo !empty($row['jurusan']) ? $row['jurusan'] : '-'; ?>
+</td>
+
+<td>
 <?php echo $row['divisi']; ?>
+</td>
+
+<td>
+<?php echo !empty($row['pesan_kesan']) ? $row['pesan_kesan'] : '-'; ?>
 </td>
 
 <td>
@@ -149,36 +139,12 @@ while($row=mysqli_fetch_assoc($data)){
 <td align="center">
 
 <?php
-
 if($row['status']=="Hadir"){
-
-echo "✅ Hadir";
-
+    echo "Hadir";
 }else{
-
-echo $row['status'];
-
+    echo $row['status'];
 }
-
 ?>
-
-</td>
-
-<td>
-
-<?php if(!empty($row['foto'])){ ?>
-
-<a href="http://localhost/genbi/assets/upload_absensi/<?php echo $row['foto']; ?>">
-
-Lihat Foto
-
-</a>
-
-<?php }else{ ?>
-
-Tidak Ada
-
-<?php } ?>
 
 </td>
 
@@ -188,25 +154,34 @@ Tidak Ada
 
 </table>
 
-<br><br><br>
+<br><br><br><br>
 
-<!-- BAGIAN TANDA TANGAN -->
-<table border="0">
-    <tr>
-        <!-- Kolom kosong untuk menggeser tanda tangan ke kanan -->
-        <td colspan="4"></td>
-        
-        <!-- Kolom isi tanda tangan -->
-        <td colspan="2" align="center" style="vertical-align: top;">
-            Cirebon, <?php echo date('d-m-Y'); ?>
-            <br>
-            <b>Ketua Umum GenBI UINSSC</b>
-            
-            <br><br><br><br><br>
-            
-            <u><b>Suci Saefiani</b></u>
-        </td>
-    </tr>
+<table border="0" width="100%">
+<tr>
+
+<td width="60%"></td>
+
+<td align="center">
+
+Cirebon,
+
+<?php echo date('d F Y'); ?>
+
+<br><br>
+
+Mengetahui,
+
+<br>
+
+<b>Ketua Umum GENBI UIN SSC</b>
+
+<br><br><br><br><br>
+
+<u><b>Suci Saefiani</b></u>
+
+</td>
+
+</tr>
 </table>
 
 </body>

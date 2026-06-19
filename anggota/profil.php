@@ -55,6 +55,48 @@ $totalHadir = mysqli_num_rows(
 
 /*
 =========================
+UPDATE DATA DIRI
+=========================
+*/
+
+if(isset($_POST['update_data'])){
+
+    $nim      = mysqli_real_escape_string(
+        $conn,
+        $_POST['nim']
+    );
+
+    $jurusan  = mysqli_real_escape_string(
+        $conn,
+        $_POST['jurusan']
+    );
+
+    mysqli_query(
+
+        $conn,
+
+        "UPDATE anggota
+        SET
+        nim='$nim',
+        jurusan='$jurusan'
+        WHERE id='$id_anggota'"
+
+    );
+
+    echo "
+    <script>
+
+    alert('Data berhasil diperbarui');
+
+    window.location='profil.php';
+
+    </script>
+    ";
+
+}
+
+/*
+=========================
 UPLOAD FOTO
 =========================
 */
@@ -328,6 +370,52 @@ Divisi
 <?php echo $data['divisi']; ?>
 
 </div>
+
+<hr>
+
+<h5 class="mb-3">
+<i class="fa-solid fa-user-pen"></i>
+Lengkapi Data Diri
+</h5>
+
+<form method="POST">
+
+<div class="mb-3">
+<label class="form-label">
+NIM
+</label>
+
+<input
+type="text"
+name="nim"
+class="form-control"
+value="<?php echo $data['nim']; ?>">
+</div>
+
+<div class="mb-3">
+<label class="form-label">
+Jurusan
+</label>
+
+<input
+type="text"
+name="jurusan"
+class="form-control"
+value="<?php echo $data['jurusan']; ?>">
+</div>
+
+<button
+type="submit"
+name="update_data"
+class="btn btn-success">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Simpan Data
+
+</button>
+
+</form>
 
 <hr>
 

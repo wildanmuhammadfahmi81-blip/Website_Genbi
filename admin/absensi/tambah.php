@@ -124,16 +124,25 @@ body{
 
 .btn-success{
 
-    background:#16a34a;
+    background:
+    linear-gradient(
+        135deg,
+        #16a34a,
+        #22c55e
+    );
 
     border:none;
 
+    box-shadow:
+    0 8px 20px rgba(34,197,94,.25);
 }
 
 .btn-success:hover{
 
-    background:#15803d;
+    transform:translateY(-3px);
 
+    box-shadow:
+    0 12px 25px rgba(34,197,94,.35);
 }
 
 @media(max-width:768px){
@@ -164,6 +173,93 @@ body{
 
     }
 
+}
+
+.input-group-custom{
+
+    position:relative;
+
+}
+
+.input-group-custom i{
+
+    position:absolute;
+
+    left:18px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#004AAD;
+
+    z-index:5;
+}
+
+.input-group-custom .form-control{
+
+    padding-left:50px;
+
+    height:55px;
+
+    border-radius:15px;
+
+    border:2px solid #eef2ff;
+
+    transition:.3s;
+}
+
+.input-group-custom .form-control:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:
+    0 0 0 4px rgba(37,99,235,.15);
+
+}
+
+.preview-box{
+
+    background:#eef4ff;
+
+    border-left:5px solid #2563eb;
+
+    padding:18px;
+
+    border-radius:15px;
+
+    margin-bottom:25px;
+}
+
+.preview-box h6{
+
+    color:#004AAD;
+
+    font-weight:700;
+}
+
+.page-header{
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.page-header::before{
+
+    content:'';
+
+    width:180px;
+    height:180px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    border-radius:50%;
+
+    position:absolute;
+
+    top:-60px;
+    right:-40px;
 }
 
 </style>
@@ -204,12 +300,18 @@ Nama Kegiatan
 
 </label>
 
-<input
-type="text"
-name="nama_kegiatan"
-class="form-control"
-placeholder="Contoh: Rapat Bulanan GENBI"
-required>
+<div class="input-group-custom">
+
+    <i class="bi bi-calendar-event"></i>
+
+    <input
+    type="text"
+    name="nama_kegiatan"
+    class="form-control"
+    placeholder="Contoh: Rapat Bulanan GENBI"
+    required>
+
+</div>
 
 </div>
 
@@ -221,11 +323,30 @@ Tanggal Kegiatan
 
 </label>
 
-<input
-type="date"
-name="tanggal"
-class="form-control"
-required>
+<div class="input-group-custom">
+
+    <i class="bi bi-calendar-date"></i>
+
+    <input
+    type="date"
+    name="tanggal"
+    class="form-control"
+    required>
+
+</div>
+
+</div>
+
+<div class="preview-box">
+
+    <h6>
+        <i class="bi bi-lightbulb"></i>
+        Tips
+    </h6>
+
+    <p class="mb-0">
+        Pastikan nama kegiatan jelas dan sesuai agenda GENBI agar anggota mudah mengenali absensi.
+    </p>
 
 </div>
 

@@ -219,27 +219,31 @@ body.dark-mode .table tbody td.text-muted i {
 
             <thead>
 
-                <tr>
+<tr>
 
-                    <th width="80">
-                        No
-                    </th>
+    <th width="80">
+        No
+    </th>
 
-                    <th>
-                        Nama
-                    </th>
+    <th>
+        Nama
+    </th>
 
-                    <th>
-                        Pesan
-                    </th>
+    <th>
+        Pesan
+    </th>
 
-                    <th width="220">
-                        Tanggal
-                    </th>
+    <th width="220">
+        Tanggal
+    </th>
 
-                </tr>
+    <th width="120">
+        Aksi
+    </th>
 
-            </thead>
+</tr>
+
+</thead>
 
             <tbody>
 
@@ -266,6 +270,15 @@ body.dark-mode .table tbody td.text-muted i {
                         <?php echo $row['tanggal']; ?>
                     </td>
 
+                    <td>
+
+   <a
+href="hapus.php?id=<?php echo $row['id']; ?>"
+class="btn btn-danger btn-sm btn-hapus">
+
+    <i class="fa-solid fa-trash"></i>
+
+</a>
                 </tr>
 
                 <?php } ?>
@@ -279,6 +292,73 @@ body.dark-mode .table tbody td.text-muted i {
 </div>
 
 <script src="../assets/js/darkmode.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+document.querySelectorAll('.btn-hapus').forEach(button => {
+
+    button.addEventListener('click', function(e){
+
+        e.preventDefault();
+
+        let url = this.getAttribute('href');
+
+        Swal.fire({
+
+            title: 'Hapus Pesan?',
+            text: 'Data yang dihapus tidak dapat dikembalikan.',
+            icon: 'warning',
+
+            showCancelButton: true,
+
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#6c757d',
+
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+
+        }).then((result) => {
+
+            if(result.isConfirmed){
+
+                window.location.href = url;
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
+<?php if(isset($_GET['hapus'])){ ?>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    Swal.fire({
+
+        icon:'success',
+
+        title:'Berhasil!',
+
+        text:'Pesan berhasil dihapus.',
+
+        showConfirmButton:false,
+
+        timer:2000
+
+    });
+
+});
+
+</script>
+
+<?php } ?>
 
 </body>
 </html>
