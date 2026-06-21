@@ -318,7 +318,7 @@ body{
     <div class="topbar">
 
         <h2>
-            Dashboard Anggota GENBI
+            Dashboard Anggota GENBI UIN SSC
         </h2>
 
     </div>
@@ -491,28 +491,18 @@ body{
 
         <h4>
 
-            Selamat Datang di Sistem Informasi GENBI UIN SSC
+            Selamat Datang di Sistem Absensi GENBI UIN SSC
 
         </h4>
 
         <p class="mt-3 text-muted">
 
-            Melalui dashboard ini anggota dapat melihat
-            informasi kegiatan, melakukan absensi,
+            Melalui dashboard ini anggota dapat melakukan absensi,
             melihat riwayat kehadiran serta mengelola
             akun secara mandiri.
 
         </p>
 
-        <a
-        href="ganti-password.php"
-        class="btn btn-warning">
-
-            <i class="fa-solid fa-key"></i>
-
-            Ganti Password
-
-        </a>
 
         <a
         href="../index.php"

@@ -424,6 +424,35 @@ textarea{
     0 15px 35px rgba(0,0,0,.08);
 }
 
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-size:24px;
+    font-weight:600;
+
+    color:#001F54;
+
+    margin-bottom:20px;
+}
+
+.section-title i{
+    font-size:22px;
+}
+
+@media(max-width:768px){
+
+    .section-title{
+        font-size:20px;
+    }
+
+    .section-title i{
+        font-size:18px;
+    }
+
+}
+
 </style>
 
 </head>
@@ -476,13 +505,13 @@ Total Kehadiran
 
 </div>
 
-<div class="row mb-4">
+<div class="section-title">
 
-    <i class="fa-solid fa-clipboard-check"></i>
+    <i class="fa-solid fa-square-check"></i>
 
-    Absensi GENBI
+    <span>Absensi GENBI</span>
 
-</h2>
+</div>
 
 <?php
 

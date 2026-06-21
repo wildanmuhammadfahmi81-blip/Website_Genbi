@@ -100,6 +100,56 @@ body{
 
 }
 
+.table-responsive{
+    border-radius:20px;
+}
+
+@media(max-width:768px){
+
+    .container{
+        padding-left:12px;
+        padding-right:12px;
+    }
+
+    .card-custom{
+        border-radius:20px;
+    }
+
+    .card-body{
+        padding:20px !important;
+    }
+
+    .page-title{
+        font-size:22px;
+        text-align:center;
+    }
+
+    .table{
+        min-width:750px;
+        font-size:13px;
+    }
+
+    .table th{
+        white-space:nowrap;
+    }
+
+    .table td{
+        white-space:nowrap;
+        vertical-align:middle;
+    }
+
+    .foto{
+        width:55px;
+        height:55px;
+    }
+
+    .btn-secondary{
+        width:100%;
+        margin-top:15px;
+    }
+
+}
+
 </style>
 
 </head>
@@ -119,6 +169,8 @@ body{
     Riwayat Absensi
 
 </h2>
+
+<div class="table-responsive">
 
 <table class="table table-bordered table-hover">
 
@@ -141,6 +193,10 @@ body{
 </tr>
 
 </thead>
+
+</table>
+
+</div>
 
 <tbody>
 
@@ -210,13 +266,14 @@ class="foto">
 
 </table>
 
+<div class="d-grid mt-3">
+
 <a
 href="dashboard.php"
 class="btn btn-secondary">
 
 <i class="fa-solid fa-arrow-left"></i>
-
-Kembali
+Kembali ke Dashboard
 
 </a>
 

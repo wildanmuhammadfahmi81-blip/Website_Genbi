@@ -290,8 +290,13 @@ ORDER BY id DESC");
                                 <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-warning text-white btn-sm btn-action" title="Edit">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
-                                <a href="hapus.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm btn-action" onclick="return confirm('Yakin ingin menghapus data ini?')" title="Hapus">
-                                    <i class="bi bi-trash"></i>
+                                <a
+                                href="hapus.php?id=<?= $row['id']; ?>"
+                                class="btn btn-danger btn-sm btn-action btn-hapus"
+                                title="Hapus">
+
+                                <i class="bi bi-trash"></i>
+
                                 </a>
                             </div>
                         </td>
@@ -318,6 +323,79 @@ document.addEventListener('DOMContentLoaded', function(){
         );
 
     }
+
+});
+
+</script>
+
+<!-- TARUH INI DI BAGIAN PALING BAWAH FILE INDEX.PHP (DAFTAR KEGIATAN) -->
+<?php if(isset($_SESSION['success_sweet'])){ ?>
+    <script>
+        Swal.fire({
+            title: 'Berhasil!',
+            text: '<?php echo $_SESSION['success_sweet']; ?>',
+            icon: 'success',
+            confirmButtonColor: '#004AAD',
+            timer: 2500,
+            timerProgressBar: true
+        });
+    </script>
+<?php 
+    // Hapus session agar tidak muncul terus-menerus saat di-refresh
+    unset($_SESSION['success_sweet']); 
+} 
+?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+document.querySelectorAll('.btn-hapus').forEach(button => {
+
+    button.addEventListener('click', function(e){
+
+        e.preventDefault();
+
+        const url = this.getAttribute('href');
+
+        Swal.fire({
+
+            title: 'Hapus Data?',
+            text: 'Data yang dihapus tidak dapat dikembalikan lagi!',
+            icon: 'warning',
+
+            showCancelButton: true,
+
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#6c757d',
+
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal',
+
+            reverseButtons: true
+
+        }).then((result) => {
+
+            if(result.isConfirmed){
+
+                Swal.fire({
+
+                    title: 'Menghapus...',
+                    text: 'Mohon tunggu sebentar',
+                    allowOutsideClick: false,
+
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+
+                });
+
+                window.location.href = url;
+
+            }
+
+        });
+
+    });
 
 });
 

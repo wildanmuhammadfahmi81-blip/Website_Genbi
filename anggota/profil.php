@@ -458,7 +458,7 @@ class="btn btn-warning">
 
 <i class="fa-solid fa-key"></i>
 
-Ganti Password
+Update Password
 
 </a>
 

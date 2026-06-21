@@ -182,6 +182,71 @@ body.dark-mode .table tbody td.text-muted i {
     color: #94a3b8 !important;
 }
 
+@media(max-width:768px){
+
+    .page-header{
+
+        padding:25px;
+        border-radius:25px;
+
+    }
+
+    .page-header h1{
+
+        font-size:32px;
+
+        line-height:1.2;
+
+    }
+
+    .page-header p{
+
+        font-size:15px;
+
+    }
+
+    .btn-back{
+
+        width:100%;
+
+        text-align:center;
+
+        justify-content:center;
+
+    }
+
+    .table-wrapper{
+
+        padding:15px;
+
+        overflow-x:auto;
+
+        -webkit-overflow-scrolling:touch;
+
+    }
+
+    .table{
+
+        min-width:700px;
+
+    }
+
+    .table thead th{
+
+        white-space:nowrap;
+
+    }
+
+    .table tbody td{
+
+        white-space:nowrap;
+
+        font-size:14px;
+
+    }
+
+}
+
 </style>
 
 </head>
@@ -215,7 +280,9 @@ body.dark-mode .table tbody td.text-muted i {
     <!-- TABLE -->
     <div class="table-wrapper">
 
-        <table class="table align-middle">
+    <div class="table-responsive">
+
+    <table class="table align-middle">
 
             <thead>
 
