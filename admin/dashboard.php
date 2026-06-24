@@ -95,30 +95,31 @@ $totalKegiatan = mysqli_num_rows($kegiatan);
 
         .sidebar{
 
-            width:270px;
-            height:100vh;
+    width:270px;
 
-            background:
-            linear-gradient(
-                180deg,
-                #001F54,
-                #003b8e
-            );
+    background:linear-gradient(
+        180deg,
+        #001F54,
+        #003b8e
+    );
 
-            position:fixed;
+    position:fixed;
 
-            top:0;
-            left:0;
+    top:0;
+    left:0;
+    bottom:0;
 
-            padding:35px 20px;
+    padding:35px 20px;
 
-            color:white;
+    color:white;
 
-            z-index:1000;
+    overflow-y:auto;
 
-            box-shadow:
-            5px 0 30px rgba(0,0,0,0.08);
-        }
+    z-index:1000;
+
+}
+
+
 
         .sidebar-logo{
 
@@ -537,7 +538,6 @@ RESPONSIVE HP
 
             position:relative;
 
-            overflow:hidden;
 
             min-height:auto;
 

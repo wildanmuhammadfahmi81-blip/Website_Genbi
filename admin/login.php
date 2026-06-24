@@ -153,35 +153,75 @@ json_decode($response);
             font-family:'Poppins',sans-serif;
         }
 
-        body{
+       body{
 
-            height:100vh;
+    min-height:100vh;
 
-            display:flex;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-            justify-content:center;
+    background:
+    linear-gradient(
+    135deg,
+    rgba(0,31,84,.92),
+    rgba(0,77,153,.85)
+    ),
+    url('../assets/image/bg-login.jpg');
 
-            align-items:center;
+    background-size:cover;
+    background-position:center;
 
-            overflow:hidden;
+    margin:0;
+    padding:20px;
 
-            position:relative;
+    position:relative;
 
-            padding:20px;
+}
 
-            background:
+.login-box{
 
-            linear-gradient(
-                135deg,
-                rgba(0,31,84,0.92),
-                rgba(0,77,153,0.85)
-            ),
+    width:100%;
+    max-width:500px;
 
-            url('../assets/image/bg-login.jpg');
+    margin:auto;
 
-            background-size:cover;
-            background-position:center;
-        }
+    background:rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,0.2);
+
+    padding:45px;
+
+    border-radius:30px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+
+    position:relative;
+
+    z-index:2;
+
+    color:white;
+
+}
+
+@media(max-width:768px){
+
+    body{
+
+        display:block;
+        padding:15px;
+
+    }
+
+    .login-box{
+
+        margin:20px auto;
+
+    }
+
+}
 
         /* OVERLAY */
 
@@ -457,17 +497,27 @@ json_decode($response);
 
 @media(max-width:768px){
 
+    body{
+
+        display:block;
+        min-height:auto;
+
+        padding:15px;
+
+        overflow-y:auto;
+
+    }
+
     .login-box{
 
-        width:92%;
+        width:100%;
+        max-width:100%;
 
-        max-width:360px;
+        margin:20px auto;
 
         padding:30px 20px;
 
         border-radius:25px;
-
-        margin:auto;
 
     }
 
@@ -480,15 +530,13 @@ json_decode($response);
 
     .login-title{
 
-        font-size:22px;
+        font-size:24px;
 
     }
 
     .login-subtitle{
 
         font-size:13px;
-
-        margin-bottom:25px;
 
     }
 

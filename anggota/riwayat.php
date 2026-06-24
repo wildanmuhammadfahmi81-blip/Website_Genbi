@@ -150,6 +150,154 @@ body{
 
 }
 
+.page-header{
+
+    background:linear-gradient(
+        135deg,
+        #001F54,
+        #004AAD
+    );
+
+    color:white;
+
+    padding:30px;
+
+    border-radius:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+    0 15px 35px rgba(0,74,173,.2);
+
+}
+
+.page-header h2{
+
+    font-weight:700;
+    margin-bottom:5px;
+
+}
+
+.page-header p{
+
+    opacity:.9;
+    margin:0;
+
+}
+
+.stat-box{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.05);
+
+    margin-bottom:25px;
+
+}
+
+.stat-box h2{
+
+    font-size:42px;
+    font-weight:700;
+    color:#001F54;
+
+}
+
+.stat-box p{
+
+    margin:0;
+    color:#64748b;
+
+}
+
+.table{
+
+    margin-bottom:0;
+
+}
+
+.table thead{
+
+    background:#001F54;
+    color:white;
+
+}
+
+.table thead th{
+
+    border:none;
+    padding:15px;
+
+}
+
+.table tbody td{
+
+    padding:15px;
+    vertical-align:middle;
+
+}
+
+.badge-status{
+
+    background:#22c55e;
+    color:white;
+
+    padding:8px 14px;
+
+    border-radius:50px;
+
+    font-size:12px;
+
+}
+
+.foto{
+
+    width:70px;
+    height:70px;
+
+    border-radius:15px;
+
+    object-fit:cover;
+
+    transition:.3s;
+
+}
+
+.foto:hover{
+
+    transform:scale(1.1);
+
+}
+
+.btn-kembali{
+
+    background:#001F54;
+    color:white;
+
+    border:none;
+
+    border-radius:15px;
+
+    padding:12px;
+
+    font-weight:600;
+
+}
+
+.btn-kembali:hover{
+
+    background:#00327f;
+    color:white;
+
+}
+
 </style>
 
 </head>
@@ -161,6 +309,26 @@ body{
 <div class="card card-custom">
 
 <div class="card-body p-4">
+
+<div class="row mb-4">
+
+<div class="col-md-4">
+
+<div class="stat-card">
+
+<h6>Total Kehadiran</h6>
+
+<h2>
+
+<?php echo mysqli_num_rows($query); ?>
+
+</h2>
+
+</div>
+
+</div>
+
+</div>
 
 <h2 class="page-title mb-4">
 
@@ -177,26 +345,15 @@ body{
 <thead>
 
 <tr>
-
 <th>No</th>
-
 <th>Kegiatan</th>
-
 <th>Tanggal</th>
-
 <th>Status</th>
-
 <th>Waktu Absen</th>
-
 <th>Foto</th>
-
 </tr>
 
 </thead>
-
-</table>
-
-</div>
 
 <tbody>
 
@@ -210,48 +367,32 @@ while($row=mysqli_fetch_assoc($query)){
 
 <tr>
 
-<td>
+<td><?= $no++; ?></td>
 
-    <?php echo $no++; ?>
+<td><?= $row['nama_kegiatan']; ?></td>
 
-</td>
-
-<td>
-
-    <?php echo $row['nama_kegiatan']; ?>
-
-</td>
-
-<td>
-
-    <?php echo $row['tanggal']; ?>
-
-</td>
+<td><?= $row['tanggal']; ?></td>
 
 <td>
 
 <span class="badge bg-success">
 
-    <?php echo $row['status']; ?>
+<?= $row['status']; ?>
 
 </span>
 
 </td>
 
-<td>
-
-    <?php echo $row['waktu_absen']; ?>
-
-</td>
+<td><?= $row['waktu_absen']; ?></td>
 
 <td>
 
 <a
-href="../assets/upload_absensi/<?php echo $row['foto']; ?>"
+href="../assets/upload_absensi/<?= $row['foto']; ?>"
 target="_blank">
 
 <img
-src="../assets/upload_absensi/<?php echo $row['foto']; ?>"
+src="../assets/upload_absensi/<?= $row['foto']; ?>"
 class="foto">
 
 </a>
@@ -266,11 +407,13 @@ class="foto">
 
 </table>
 
+</div>
+
 <div class="d-grid mt-3">
 
 <a
 href="dashboard.php"
-class="btn btn-secondary">
+class="btn btn-kembali"
 
 <i class="fa-solid fa-arrow-left"></i>
 Kembali ke Dashboard
