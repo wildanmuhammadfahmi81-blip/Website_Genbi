@@ -1,403 +1,885 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | GENBI UIN SSC</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
-<title>Login GENBI UIN SSC</title>
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
 
-<style>
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(37, 99, 235, .25),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(14, 165, 233, .18),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #020b24 0%,
+                    #05265f 48%,
+                    #064fc4 100%
+                );
 
-*{
-    font-family:'Poppins',sans-serif;
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-body{
+            padding: 30px 20px;
 
-    background:
-    linear-gradient(
-    135deg,
-    #001F54,
-    #004AAD
-    );
+            overflow-x: hidden;
+        }
 
-    min-height:100vh;
-    padding:30px 15px;
 
-    overflow-x:hidden;
-}
+        /* =====================================================
+           BACKGROUND DECORATION
+        ===================================================== */
 
-.login-wrapper{
+        .background-circle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-    max-width:1000px;
-    margin:auto;
+        .circle-one {
+            width: 350px;
+            height: 350px;
 
-}
+            top: -160px;
+            left: -120px;
 
-.login-box{
+            background: rgba(59, 130, 246, .13);
 
-    background:white;
+            filter: blur(2px);
+        }
 
-    border-radius:35px;
+        .circle-two {
+            width: 300px;
+            height: 300px;
 
-    overflow:hidden;
+            right: -100px;
+            bottom: -120px;
 
-    box-shadow:
-    0 20px 50px rgba(0,0,0,.18);
+            background: rgba(14, 165, 233, .12);
 
-}
+            filter: blur(2px);
+        }
 
-.left-side{
 
-    background:
-    linear-gradient(
-    135deg,
-    #001F54,
-    #004AAD
-    );
+        /* =====================================================
+           LOGIN WRAPPER
+        ===================================================== */
 
-    color:white;
+        .login-wrapper {
+            width: 100%;
+            max-width: 1080px;
 
-    padding:60px 40px;
+            position: relative;
+            z-index: 2;
+        }
 
-    height:100%;
 
-    position:relative;
+        /* =====================================================
+           MAIN CARD
+        ===================================================== */
 
-    overflow:hidden;
+        .login-box {
 
-}
+            width: 100%;
 
-.left-side::before{
+            background: rgba(255, 255, 255, .97);
 
-    content:"";
+            border-radius: 32px;
 
-    width:300px;
-    height:300px;
+            overflow: hidden;
 
-    background:
-    rgba(255,255,255,.08);
+            box-shadow:
+                0 35px 80px rgba(0, 0, 0, .28);
 
-    border-radius:50%;
+            border: 1px solid rgba(255,255,255,.5);
+        }
 
-    position:absolute;
 
-    top:-100px;
-    right:-100px;
+        /* =====================================================
+           LEFT SIDE
+        ===================================================== */
 
-}
+        .left-side {
 
-.left-side::after{
+            min-height: 620px;
 
-    content:"";
+            padding: 65px 55px;
 
-    width:180px;
-    height:180px;
+            color: white;
 
-    background:
-    rgba(255,255,255,.06);
+            position: relative;
 
-    border-radius:50%;
+            overflow: hidden;
 
-    position:absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
 
-    bottom:-60px;
-    left:-60px;
+            background:
+                linear-gradient(
+                    145deg,
+                    #031b4e 0%,
+                    #063f91 55%,
+                    #075bd7 100%
+                );
+        }
 
-}
 
-.logo-icon{
+        .left-side::before {
 
-    width:90px;
-    height:90px;
+            content: "";
 
-    background:white;
+            position: absolute;
 
-    color:#004AAD;
+            width: 330px;
+            height: 330px;
 
-    border-radius:25px;
+            border-radius: 50%;
 
-    display:flex;
+            top: -150px;
+            right: -120px;
 
-    align-items:center;
-    justify-content:center;
+            background: rgba(255,255,255,.07);
+        }
 
-    font-size:40px;
 
-    margin-bottom:25px;
+        .left-side::after {
 
-    position:relative;
-    z-index:2;
+            content: "";
 
-}
+            position: absolute;
 
-.left-side h1{
+            width: 230px;
+            height: 230px;
 
-    font-weight:800;
-    position:relative;
-    z-index:2;
+            border-radius: 50%;
 
-}
+            bottom: -110px;
+            left: -100px;
 
-.left-side p{
+            background: rgba(255,255,255,.06);
+        }
 
-    position:relative;
-    z-index:2;
 
-    opacity:.9;
-    line-height:1.8;
+        /* =====================================================
+           LOGO
+        ===================================================== */
 
-}
+        .logo-wrapper {
 
-.right-side{
+            position: relative;
+            z-index: 2;
 
-    padding:50px 40px;
+            margin-bottom: 30px;
+        }
 
-}
+        .logo-icon {
 
-.title{
+            width: 92px;
+            height: 92px;
 
-    text-align:center;
-    margin-bottom:35px;
+            border-radius: 26px;
 
-}
+            background: rgba(255,255,255,.98);
 
-.title h2{
+            color: #075bd7;
 
-    font-weight:700;
-    color:#001F54;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-}
+            font-size: 42px;
 
-.login-card{
+            box-shadow:
+                0 15px 35px rgba(0,0,0,.15);
+        }
 
-    background:#f8fbff;
 
-    border:2px solid #eef3ff;
+        /* =====================================================
+           LEFT TEXT
+        ===================================================== */
 
-    border-radius:25px;
+        .brand-title {
 
-    padding:30px;
+            position: relative;
+            z-index: 2;
 
-    text-align:center;
+            font-size: 42px;
 
-    transition:.3s;
+            font-weight: 800;
 
-    height:100%;
-}
+            letter-spacing: -1.5px;
 
-.login-card:hover{
+            margin-bottom: 18px;
+        }
 
-    transform:translateY(-8px);
 
-    box-shadow:
-    0 15px 30px rgba(0,0,0,.08);
+        .brand-description {
 
-}
+            position: relative;
+            z-index: 2;
 
-.login-card i{
+            max-width: 440px;
 
-    font-size:55px;
+            color: rgba(255,255,255,.86);
 
-    margin-bottom:20px;
-}
+            font-size: 15px;
 
-.admin{
+            line-height: 1.9;
 
-    color:#2563eb;
-}
+            margin-bottom: 35px;
+        }
 
-.anggota{
 
-    color:#10b981;
-}
+        /* =====================================================
+           INFORMATION BADGE
+        ===================================================== */
 
-.login-card h4{
+        .organization-badge {
 
-    font-weight:700;
-}
+            position: relative;
+            z-index: 2;
 
-.btn-login{
+            display: inline-flex;
 
-    border-radius:50px;
+            align-items: center;
 
-    padding:12px 25px;
+            gap: 10px;
 
-    font-weight:600;
+            width: fit-content;
 
-    margin-top:10px;
-}
+            padding: 11px 17px;
 
-.footer-text{
+            border-radius: 50px;
 
-    text-align:center;
+            background: rgba(255,255,255,.10);
 
-    margin-top:25px;
+            border: 1px solid rgba(255,255,255,.16);
 
-    color:#64748b;
+            color: rgba(255,255,255,.9);
 
-    font-size:14px;
-}
+            font-size: 13px;
+        }
 
-@media(max-width:768px){
+        .organization-badge i {
+            color: #7dd3fc;
+        }
 
-    body{
 
-        padding:15px;
-    }
+        /* =====================================================
+           RIGHT SIDE
+        ===================================================== */
 
-    .left-side{
+        .right-side {
 
-        text-align:center;
-        padding:40px 25px;
-    }
+            min-height: 620px;
 
-    .logo-icon{
+            padding: 65px 60px;
 
-        margin:auto auto 20px;
-    }
+            display: flex;
 
-    .right-side{
+            flex-direction: column;
 
-        padding:30px 20px;
-    }
+            justify-content: center;
 
-    .title h2{
+            background: #ffffff;
+        }
 
-        font-size:24px;
-    }
 
-}
+        /* =====================================================
+           LOGIN HEADER
+        ===================================================== */
 
-</style>
+        .login-header {
+
+            margin-bottom: 35px;
+        }
+
+
+        .login-header .small-title {
+
+            color: #2563eb;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .login-header h2 {
+
+            color: #0b1f44;
+
+            font-size: 36px;
+
+            font-weight: 800;
+
+            margin-bottom: 12px;
+
+            letter-spacing: -1px;
+        }
+
+
+        .login-header p {
+
+            color: #64748b;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            margin: 0;
+
+            max-width: 470px;
+        }
+
+
+        /* =====================================================
+           ADMIN CARD
+        ===================================================== */
+
+        .admin-card {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #f8fbff,
+                    #eef6ff
+                );
+
+            border: 1px solid #dbeafe;
+
+            border-radius: 26px;
+
+            padding: 32px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            transition: .3s ease;
+
+            box-shadow:
+                0 12px 35px rgba(37,99,235,.07);
+        }
+
+
+        .admin-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            top: -100px;
+            right: -80px;
+
+            background: rgba(37,99,235,.07);
+        }
+
+
+        .admin-card:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 20px 45px rgba(37,99,235,.13);
+
+            border-color: #bfdbfe;
+        }
+
+
+        /* =====================================================
+           ADMIN ICON
+        ===================================================== */
+
+        .admin-icon {
+
+            width: 72px;
+            height: 72px;
+
+            border-radius: 20px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #0ea5e9
+                );
+
+            color: white;
+
+            font-size: 30px;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 10px 25px rgba(37,99,235,.25);
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .admin-card h3 {
+
+            color: #0f274f;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .admin-card p {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+            margin-bottom: 25px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* =====================================================
+           LOGIN BUTTON
+        ===================================================== */
+
+        .btn-login {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 15px 25px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #075bd7
+                );
+
+            color: white;
+
+            font-family: 'Poppins', sans-serif;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            box-shadow:
+                0 10px 25px rgba(37,99,235,.25);
+
+            transition: .3s ease;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .btn-login:hover {
+
+            color: white;
+
+            transform: translateY(-2px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1d4ed8,
+                    #0346aa
+                );
+
+            box-shadow:
+                0 15px 30px rgba(37,99,235,.32);
+        }
+
+
+        .btn-login i {
+
+            transition: .3s ease;
+        }
+
+
+        .btn-login:hover i {
+
+            transform: translateX(4px);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            margin-top: 28px;
+        }
+
+
+        .footer span {
+
+            color: #2563eb;
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 991px) {
+
+            .left-side {
+
+                min-height: auto;
+
+                padding: 50px 40px;
+
+                text-align: center;
+
+                align-items: center;
+            }
+
+            .brand-description {
+
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .right-side {
+
+                min-height: auto;
+
+                padding: 50px 40px;
+            }
+
+        }
+
+
+        @media (max-width: 575px) {
+
+            body {
+
+                padding: 15px;
+            }
+
+            .login-box {
+
+                border-radius: 24px;
+            }
+
+            .left-side {
+
+                padding: 45px 25px;
+            }
+
+            .logo-icon {
+
+                width: 78px;
+                height: 78px;
+
+                font-size: 34px;
+
+                border-radius: 22px;
+            }
+
+            .brand-title {
+
+                font-size: 30px;
+
+                letter-spacing: -1px;
+            }
+
+            .brand-description {
+
+                font-size: 13px;
+
+                line-height: 1.8;
+            }
+
+            .right-side {
+
+                padding: 40px 25px;
+            }
+
+            .login-header h2 {
+
+                font-size: 29px;
+            }
+
+            .admin-card {
+
+                padding: 25px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
+
+
+<!-- Background decoration -->
+
+<div class="background-circle circle-one"></div>
+<div class="background-circle circle-two"></div>
+
 
 <div class="login-wrapper">
 
-<div class="login-box">
+    <div class="login-box">
 
-<div class="row g-0">
+        <div class="row g-0">
 
-<div class="col-lg-5">
 
-<div class="left-side">
+            <!-- =================================================
+                 LEFT SIDE
+            ================================================== -->
 
-<div class="logo-icon">
+            <div class="col-lg-5">
 
-<i class="fa-solid fa-graduation-cap"></i>
+                <div class="left-side">
+
+                    <div class="logo-wrapper">
+
+                        <div class="logo-icon">
+
+                            <i class="fa-solid fa-graduation-cap"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <h1 class="brand-title">
+
+                        GENBI UIN SSC
+
+                    </h1>
+
+
+                    <p class="brand-description">
+
+                        Sistem Informasi Organisasi untuk mendukung
+                        pengelolaan anggota, kegiatan, berita,
+                        absensi, serta berbagai aktivitas
+                        Generasi Baru Indonesia UIN Siber
+                        Syekh Nurjati Cirebon.
+
+                    </p>
+
+
+                    <div class="organization-badge">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <span>
+                            Sistem Manajemen GENBI
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RIGHT SIDE
+            ================================================== -->
+
+            <div class="col-lg-7">
+
+                <div class="right-side">
+
+
+                    <!-- Header -->
+
+                    <div class="login-header">
+
+                        <div class="small-title">
+
+                            Secure Access
+
+                        </div>
+
+                        <h2>
+
+                            Login Sistem
+
+                        </h2>
+
+                        <p>
+
+                            Silakan masuk menggunakan akun administrator
+                            untuk mengakses dan mengelola sistem
+                            informasi GENBI UIN SSC.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- Admin Login -->
+
+                    <div class="admin-card">
+
+
+                        <div class="admin-icon">
+
+                            <i class="fa-solid fa-user-shield"></i>
+
+                        </div>
+
+
+                        <h3>
+
+                            Administrator
+
+                        </h3>
+
+
+                        <p>
+
+                            Kelola data anggota, kegiatan, berita,
+                            absensi, laporan, dan seluruh informasi
+                            organisasi melalui panel administrator.
+
+                        </p>
+
+
+                        <a
+                            href="admin/login.php"
+                            class="btn-login"
+                        >
+
+                            <span>
+                                Masuk ke Panel Admin
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+
+                    </div>
+
+
+                    <!-- Footer -->
+
+                    <div class="footer">
+
+                        © <?= date('Y'); ?>
+
+                        <span>GENBI UIN SSC</span>
+
+                        · Sistem Informasi Organisasi
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
 
 </div>
 
-<h1>GENBI UIN SSC</h1>
-
-<p>
-
-Sistem Informasi Organisasi untuk pengelolaan
-anggota, kegiatan, berita dan absensi
-Generasi Baru Indonesia UIN Siber Syekh Nurjati Cirebon.
-
-</p>
-
-</div>
-
-</div>
-
-<div class="col-lg-7">
-
-<div class="right-side">
-
-<div class="title">
-
-<h2>Login Sistem</h2>
-
-<p>Pilih jenis akun yang akan digunakan</p>
-
-</div>
-
-<div class="row">
-
-<div class="col-md-6 mb-3">
-
-<div class="login-card">
-
-<i class="fa-solid fa-user-shield admin"></i>
-
-<h4>Admin</h4>
-
-<p>
-
-Kelola anggota, kegiatan,
-berita dan absensi GENBI.
-
-</p>
-
-<a
-href="admin/login.php"
-class="btn btn-primary btn-login">
-
-Login Admin
-
-</a>
-
-</div>
-
-</div>
-
-<div class="col-md-6 mb-3">
-
-<div class="login-card">
-
-<i class="fa-solid fa-user-graduate anggota"></i>
-
-<h4>Anggota</h4>
-
-<p>
-
-Melakukan absensi,
-melihat riwayat dan profil.
-
-</p>
-
-<a
-href="anggota/login.php"
-class="btn btn-success btn-login">
-
-Login Anggota
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="footer-text">
-
-© <?php echo date('Y'); ?> GENBI UIN SSC
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
 
 </body>
+
 </html>

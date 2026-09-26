@@ -19,7 +19,7 @@ ini_set('display_errors', 1);
     >
 
     <title>
-        GENBI - Generasi Baru Indonesia
+        GenBI - Generasi Baru Indonesia
     </title>
 
     <!-- BOOTSTRAP -->
@@ -112,12 +112,12 @@ Swal.fire({
         <div class="section-title text-center" data-aos="fade-up">
 
             <h2>
-                Tentang GENBI UIN SSC
+                Tentang GenBI UIN SSC
             </h2>
 
             <p>
-                Generasi Baru Indonesia (GENBI) UIN Siber Syekh Nurjati Cirebon 
-                merupakan komunitas mahasiswa penerima beasiswa Bank Indonesia 
+                Generasi Baru Indonesia (GenBI) UIN Siber Syekh Nurjati Cirebon 
+                merupakan komunitas mahasiswa penerima program Bantuan Pendidikan Kebanksentralan Bank Indonesia 
                 yang aktif dalam pengembangan karakter, kepemimpinan, 
                 pendidikan, sosial masyarakat, dan inovasi generasi muda.
             </p>
@@ -159,7 +159,7 @@ Swal.fire({
             </div>
 
             <h3>
-                Change Agent
+                Agent of Change
             </h3>
 
             <p>
@@ -212,7 +212,7 @@ VISI MISI GENBI
         <div class="section-title text-center" data-aos="fade-up">
 
             <h2>
-                Visi & Misi
+                VISI & MISI GenBI UIN SSC
             </h2>
 
             <p>
@@ -236,11 +236,11 @@ VISI MISI GENBI
                     </div>
 
                     <h3>
-                        Visi
+                        VISI GenBI  
                     </h3>
 
                     <p>
-                        Menjadikan GENBI UIN SSC sebagai komunitas 
+                        Menjadikan GenBI UIN SSC sebagai komunitas 
                         generasi muda yang aktif, unggul, kreatif, 
                         dan mampu memberikan kontribusi nyata bagi 
                         masyarakat, lingkungan, dan Indonesia.
@@ -258,7 +258,7 @@ VISI MISI GENBI
                 <div class="misi-card">
 
                     <h3>
-                        Misi GENBI
+                        MISI GenBI
                     </h3>
 
                     <!-- ITEM -->
@@ -328,11 +328,11 @@ VISI MISI GENBI
         <div class="section-title text-center" data-aos="fade-up">
 
             <h2>
-                Program & Movement GENBI
+                Program & Movement GenBI
             </h2>
 
             <p>
-                GENBI UIN SSC hadir melalui berbagai program inspiratif 
+                GenBI UIN SSC hadir melalui berbagai program inspiratif 
                 untuk membangun generasi muda yang aktif, kreatif, 
                 dan berdampak bagi masyarakat.
             </p>
@@ -352,7 +352,7 @@ VISI MISI GENBI
                     </div>
 
                     <h3>
-                        GENBI Teaching
+                        GenBI Teaching
                     </h3>
 
                     <p>
@@ -374,12 +374,12 @@ VISI MISI GENBI
                     </div>
 
                     <h3>
-                        Social Action
+                        GenBI Social Action
                     </h3>
 
                     <p>
                         Aksi sosial, bakti masyarakat, dan kegiatan kemanusiaan 
-                        sebagai bentuk kepedulian GENBI terhadap lingkungan sekitar.
+                        sebagai bentuk kepedulian GenBI terhadap lingkungan sekitar.
                     </p>
 
                 </div>
@@ -396,7 +396,7 @@ VISI MISI GENBI
                     </div>
 
                     <h3>
-                        Leadership Camp
+                        GenBI Leadership Camp
                     </h3>
 
                     <p>
@@ -418,7 +418,7 @@ VISI MISI GENBI
                     </div>
 
                     <h3>
-                        Green Movement
+                        GenBI Green Movement
                     </h3>
 
                     <p>
@@ -440,11 +440,11 @@ VISI MISI GENBI
                     </div>
 
                     <h3>
-                        Creative Media
+                        GenBI Creative Media
                     </h3>
 
                     <p>
-                        Media kreatif GENBI dalam menyebarkan informasi, 
+                        Media kreatif GenBI dalam menyebarkan informasi, 
                         edukasi, dan inspirasi melalui platform digital.
                     </p>
 
@@ -462,7 +462,7 @@ VISI MISI GENBI
                     </div>
 
                     <h3>
-                        GENBI Collaboration
+                        GenBI Collaboration
                     </h3>
 
                     <p>
@@ -493,7 +493,7 @@ STRUKTUR ORGANISASI
             <h2>Struktur Kepengurusan</h2>
 
             <p>
-                GENBI UIN SSC Periode 2025
+                GenBI UIN SSC Periode 2025
             </p>
 
         </div>
@@ -1044,12 +1044,12 @@ MODAL DIVISI KEWIRAUSAHAAN
                         <div class="member-card-premium">
 
                             <img 
-                                src="assets/image/anggota/kewirausahaan/aldi.jpg"
+                                src="assets/image/anggota/kewirausahaan/fatimah.jpg"
                                 class="member-img"
                             >
 
                             <h4>
-                                Muhammad Aldi
+                                Fatimah Azzahra
                             </h4>
 
                             <span>
@@ -1215,18 +1215,18 @@ MODAL DIVISI KEWIRAUSAHAAN
 
                     </div>
 
-                    <!-- FATIMAH -->
+                    <!-- ALDI -->
                     <div class="col-lg-3 col-md-4 col-6 mb-4">
 
                         <div class="anggota-card">
 
                             <img 
-                                src="assets/image/anggota/kewirausahaan/fatimah.jpg"
+                                src="assets/image/anggota/kewirausahaan/aldi.jpg"
                                 class="anggota-img"
                             >
 
                             <h5>
-                                Fatimah Azzahra
+                                Muhammad Aldi
                             </h5>
 
                         </div>
@@ -1947,12 +1947,12 @@ BERITA SECTION
         <div class="section-title text-center" data-aos="fade-up">
 
             <h2>
-                Berita & Kegiatan
+                Berita GENBI
             </h2>
 
             <p>
-                Informasi terbaru seputar kegiatan 
-                dan aktivitas GENBI UIN SSC
+                Informasi terbaru seputar Berita 
+                dan aktivitas GenBI UIN SSC
             </p>
 
         </div>
@@ -2055,7 +2055,7 @@ KEGIATAN SECTION
 
             <p>
                 Dokumentasi kegiatan dan event 
-                GENBI UIN SSC
+                GenBI UIN SSC
             </p>
 
         </div>
@@ -2152,12 +2152,12 @@ FAQ SECTION
         <div class="section-title text-center" data-aos="fade-up">
 
             <h2>
-                Frequently Asked Questions
+                Pertanyaan yang Sering Diajukan
             </h2>
 
             <p>
                 Beberapa pertanyaan yang sering ditanyakan 
-                mengenai GENBI UIN SSC.
+                mengenai GenBI UIN SSC.
             </p>
 
         </div>
@@ -2178,7 +2178,7 @@ FAQ SECTION
                             data-bs-toggle="collapse"
                             data-bs-target="#faq1">
 
-                            Apa itu GENBI?
+                            Apa itu GenBI?
 
                         </button>
 
@@ -2191,7 +2191,7 @@ FAQ SECTION
 
                         <div class="accordion-body">
 
-                            GENBI (Generasi Baru Indonesia) adalah komunitas 
+                            GenBI (Generasi Baru Indonesia) adalah komunitas 
                             mahasiswa penerima beasiswa Bank Indonesia yang 
                             aktif dalam bidang pendidikan, sosial, lingkungan, 
                             dan pengembangan leadership.
@@ -2213,7 +2213,7 @@ FAQ SECTION
                             data-bs-toggle="collapse"
                             data-bs-target="#faq2">
 
-                            Apa tujuan GENBI UIN SSC?
+                            Apa tujuan GenBI UIN SSC?
 
                         </button>
 
@@ -2226,7 +2226,7 @@ FAQ SECTION
 
                         <div class="accordion-body">
 
-                            GENBI UIN SSC bertujuan membentuk generasi muda 
+                            GenBI UIN SSC bertujuan membentuk generasi muda 
                             yang unggul, aktif, inovatif, dan mampu memberikan 
                             dampak positif bagi masyarakat dan Indonesia.
 
@@ -2247,7 +2247,7 @@ FAQ SECTION
                             data-bs-toggle="collapse"
                             data-bs-target="#faq3">
 
-                            Program apa saja yang dimiliki GENBI?
+                            Program apa saja yang dimiliki GenBI?
 
                         </button>
 
@@ -2260,8 +2260,8 @@ FAQ SECTION
 
                         <div class="accordion-body">
 
-                            GENBI memiliki berbagai program seperti 
-                            GENBI Mengajar, Leadership Training, 
+                            GenBI memiliki berbagai program seperti 
+                            GenBI Mengajar, Leadership Training, 
                             Social Movement, Green Movement, 
                             dan kegiatan pengembangan mahasiswa lainnya.
 
@@ -2282,7 +2282,7 @@ FAQ SECTION
                             data-bs-toggle="collapse"
                             data-bs-target="#faq4">
 
-                            Bagaimana cara bergabung dengan GENBI?
+                            Bagaimana cara bergabung dengan GenBI?
 
                         </button>
 
@@ -2295,9 +2295,9 @@ FAQ SECTION
 
                         <div class="accordion-body">
 
-                            Untuk bergabung dengan GENBI, mahasiswa harus 
+                            Untuk bergabung dengan GenBI, mahasiswa harus 
                             menjadi penerima beasiswa Bank Indonesia dan 
-                            mengikuti proses seleksi organisasi GENBI.
+                            mengikuti proses seleksi organisasi GenBI.
 
                         </div>
 
@@ -2316,7 +2316,7 @@ FAQ SECTION
                             data-bs-toggle="collapse"
                             data-bs-target="#faq5">
 
-                            Apa manfaat menjadi anggota GENBI?
+                            Apa manfaat menjadi anggota GenBI?
 
                         </button>
 
@@ -2462,7 +2462,7 @@ CONTACT SECTION
 
             <p>
                 Hubungi kami untuk kolaborasi, informasi, 
-                dan kegiatan GENBI UIN SSC.
+                dan kegiatan GenBI UIN SSC.
             </p>
 
         </div>
@@ -2578,7 +2578,7 @@ CONTACT SECTION
                     </h3>
 
                     <p>
-                        Mari terhubung bersama GENBI 
+                        Mari terhubung bersama GenBI 
                         untuk menciptakan generasi muda 
                         yang aktif dan berdampak.
                     </p>
@@ -2687,12 +2687,12 @@ PESAN & KESAN SECTION
         <div class="section-title text-center" data-aos="fade-up">
 
             <h2>
-                Pesan & Kesan untuk GENBI
+                Pesan & Kesan untuk GenBI
             </h2>
 
             <p>
                 Tinggalkan pesan, kesan, atau aspirasi
-                untuk GENBI UIN SSC
+                untuk GenBI UIN SSC
             </p>
 
         </div>
@@ -2861,10 +2861,10 @@ document.querySelectorAll('.nav-link').forEach(link => {
 const hero = document.querySelector('.hero');
 
 const backgrounds = [
-    'assets/image/bkg.jpg',
-    'assets/image/bg1.jpg',
-    'assets/image/bkg.jpg',
-    'assets/image/bg1.jpg'
+    'assets/image/2.jpg',
+    'assets/image/3.jpg',
+    'assets/image/4.jpg',
+    'assets/image/5.jpg'
 ];
 
 let index = 0;

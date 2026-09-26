@@ -64,12 +64,7 @@
                     </a>
                 </li>
 
-                <!-- LOGIN BUTTON -->
-                <li class="nav-item">
-                    <a class="nav-link btn-login" href="login.php">
-                        Login
-                    </a>
-                </li>
+            
 
             </ul>
 

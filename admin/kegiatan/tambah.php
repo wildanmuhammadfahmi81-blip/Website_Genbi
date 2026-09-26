@@ -9,6 +9,9 @@ if(!isset($_SESSION['login'])){
     exit();
 }
 
+$success = false;
+$error = false;
+
 if(isset($_POST['simpan'])){
 
     $judul      = $_POST['judul'];
@@ -19,35 +22,36 @@ if(isset($_POST['simpan'])){
     $gambar = $_FILES['gambar']['name'];
     $tmp    = $_FILES['gambar']['tmp_name'];
 
+    // Upload file
     move_uploaded_file(
         $tmp,
         "../../assets/upload/kegiatan/".$gambar
     );
 
-    mysqli_query($conn,
+    // Insert ke database
+    $insert = mysqli_query($conn,
         "INSERT INTO kegiatan(
-
             judul,
             deskripsi,
             gambar,
             tanggal,
             lokasi
-
         )
-
         VALUES(
-
             '$judul',
             '$deskripsi',
             '$gambar',
             '$tanggal',
             '$lokasi'
-
         )"
     );
 
-    header("Location: index.php");
-
+    // Cek apakah query berhasil
+    if($insert) {
+        $success = true;
+    } else {
+        $error = true;
+    }
 }
 
 ?>
@@ -55,497 +59,368 @@ if(isset($_POST['simpan'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>
-    Tambah Kegiatan
-</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tambah Kegiatan - GENBI</title>
 
 <!-- BOOTSTRAP -->
-<link
-href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-rel="stylesheet">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- FONT AWESOME -->
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <!-- GOOGLE FONT -->
-<link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- SWEETALERT2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-body{
-
-    background:#f4f7fe;
-
-    min-height:100vh;
-
-    padding:40px 0;
-}
-
-/* =========================
-CONTAINER
-========================= */
-
-.form-container{
-
-    max-width:900px;
-
-    margin:auto;
-}
-
-/* =========================
-HEADER
-========================= */
-
-.page-header{
-
-    background:
-    linear-gradient(
-        135deg,
-        #001F54,
-        #004AAD
-    );
-
-    padding:40px;
-
-    border-radius:30px;
-
-    color:white;
-
-    margin-bottom:35px;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.page-header::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:250px;
-    height:250px;
-
-    background:
-    rgba(255,255,255,0.08);
-
-    border-radius:50%;
-
-    top:-100px;
-    right:-80px;
-}
-
-.page-header h1{
-
-    font-size:40px;
-
-    font-weight:700;
-
-    margin-bottom:10px;
-
-    position:relative;
-    z-index:2;
-}
-
-.page-header p{
-
-    color:#dbeafe;
-
-    margin:0;
-
-    position:relative;
-    z-index:2;
-}
-
-/* =========================
-CARD
-========================= */
-
-.form-card{
-
-    background:white;
-
-    border-radius:30px;
-
-    padding:40px;
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,0.05);
-}
-
-/* =========================
-FORM LABEL
-========================= */
-
-.form-label{
-
-    font-weight:600;
-
-    color:#001F54;
-
-    margin-bottom:10px;
-}
-
-/* =========================
-FORM CONTROL
-========================= */
-
-.form-control{
-
-    border:2px solid #e5e7eb;
-
-    border-radius:18px;
-
-    padding:15px 18px;
-
-    transition:0.3s;
-
-    font-size:15px;
-}
-
-.form-control:focus{
-
-    border-color:#004AAD;
-
-    box-shadow:none;
-}
-
-/* =========================
-TEXTAREA
-========================= */
-
-textarea.form-control{
-
-    resize:none;
-}
-
-/* =========================
-UPLOAD BOX
-========================= */
-
-.upload-box{
-
-    border:2px dashed #cbd5e1;
-
-    border-radius:20px;
-
-    padding:30px;
-
-    text-align:center;
-
-    background:#f8fbff;
-
-    transition:0.3s;
-}
-
-.upload-box:hover{
-
-    border-color:#004AAD;
-
-    background:#eef4ff;
-}
-
-.upload-box i{
-
-    font-size:45px;
-
-    color:#004AAD;
-
-    margin-bottom:15px;
-}
-
-.upload-box p{
-
-    margin:0;
-
-    color:#666;
-}
-
-/* =========================
-BUTTONS
-========================= */
-
-.button-group{
-
-    margin-top:35px;
-
-    display:flex;
-
-    gap:15px;
-
-    flex-wrap:wrap;
-}
-
-.btn-custom{
-
-    border:none;
-
-    padding:14px 28px;
-
-    border-radius:50px;
-
-    font-weight:600;
-
-    transition:0.3s;
-
-    text-decoration:none;
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:10px;
-}
-
-/* SIMPAN */
-
-.btn-save{
-
-    background:
-    linear-gradient(
-        135deg,
-        #001F54,
-        #004AAD
-    );
-
-    color:white;
-}
-
-.btn-save:hover{
-
-    transform:translateY(-3px);
-
-    opacity:0.9;
-}
-
-/* KEMBALI */
-
-.btn-back{
-
-    background:#e5e7eb;
-
-    color:#111827;
-}
-
-.btn-back:hover{
-
-    background:#d1d5db;
-
-    transform:translateY(-3px);
-}
-
-/* =========================
-RESPONSIVE
-========================= */
-
-@media(max-width:768px){
-
-    body{
-        padding:20px;
+    :root {
+        --primary: #004AAD;
+        --secondary: #001F54;
+        --bg-color: #f0f4f8;
+        --card-bg: #ffffff;
+        --text-dark: #1e293b;
+        --text-muted: #64748b;
     }
 
-    .page-header{
-        padding:30px;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
     }
 
-    .page-header h1{
-        font-size:30px;
+    body {
+        background: var(--bg-color);
+        min-height: 100vh;
+        padding: 50px 0;
+        color: var(--text-dark);
     }
 
-    .form-card{
-        padding:30px 20px;
+    .form-container {
+        max-width: 850px;
+        margin: auto;
     }
 
-}
+    /* =========================
+       ANIMATION
+    ========================= */
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
+    /* =========================
+       HEADER
+    ========================= */
+    .page-header {
+        background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        padding: 45px 40px;
+        border-radius: 24px;
+        color: white;
+        margin-bottom: -40px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0, 74, 173, 0.2);
+        animation: fadeUp 0.6s ease-out;
+        z-index: 1;
+    }
+
+    .page-header::before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        top: -120px;
+        right: -100px;
+        backdrop-filter: blur(5px);
+    }
+
+    .page-header h1 {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 2;
+        letter-spacing: -0.5px;
+    }
+
+    .page-header p {
+        color: rgba(255, 255, 255, 0.85);
+        margin: 0;
+        font-size: 15px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* =========================
+       CARD & FORMS
+    ========================= */
+    .form-card {
+        background: var(--card-bg);
+        border-radius: 24px;
+        padding: 70px 40px 40px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+        position: relative;
+        z-index: 2;
+        animation: fadeUp 0.6s ease-out 0.1s both;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 10px;
+        font-size: 14px;
+        letter-spacing: 0.3px;
+    }
+
+    .input-group-custom {
+        position: relative;
+    }
+
+    .input-group-custom i {
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 18px;
+        transition: 0.3s;
+    }
+
+    .form-control {
+        background: #f8fafc;
+        border: 2px solid transparent;
+        border-radius: 16px;
+        padding: 16px 20px;
+        transition: all 0.3s ease;
+        font-size: 15px;
+        color: var(--text-dark);
+        box-shadow: none;
+    }
+
+    .input-group-custom .form-control {
+        padding-left: 55px;
+    }
+
+    .form-control:focus {
+        background: white;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(0, 74, 173, 0.1);
+    }
+
+    .form-control:focus + i, 
+    .form-control:focus ~ i {
+        color: var(--primary);
+    }
+
+    textarea.form-control {
+        resize: none;
+        padding-top: 18px;
+    }
+
+    /* =========================
+       UPLOAD BOX
+    ========================= */
+    .upload-box {
+        border: 2px dashed #cbd5e1;
+        border-radius: 20px;
+        padding: 40px 30px;
+        text-align: center;
+        background: #f8fafc;
+        transition: all 0.3s ease;
+    }
+
+    .upload-box:hover, .upload-box:focus-within {
+        border-color: var(--primary);
+        background: #f0f7ff;
+    }
+
+    .upload-box i {
+        font-size: 50px;
+        color: var(--primary);
+        margin-bottom: 15px;
+        transition: transform 0.3s ease;
+    }
+
+    .upload-box:hover i {
+        transform: translateY(-5px);
+    }
+
+    .upload-box p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .upload-box input[type="file"] {
+        background: white;
+        border: 1px solid #e2e8f0;
+        padding: 10px;
+        border-radius: 12px;
+        font-size: 14px;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================= */
+    .button-group {
+        margin-top: 40px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .btn-custom {
+        border: none;
+        padding: 15px 32px;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    .btn-save {
+        background: linear-gradient(135deg, var(--secondary), var(--primary));
+        color: white;
+        box-shadow: 0 10px 20px rgba(0, 74, 173, 0.2);
+    }
+
+    .btn-save:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 25px rgba(0, 74, 173, 0.3);
+        color: white;
+    }
+
+    .btn-back {
+        background: #f1f5f9;
+        color: var(--text-dark);
+    }
+
+    .btn-back:hover {
+        background: #e2e8f0;
+        color: var(--text-dark);
+        transform: translateY(-3px);
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+    @media(max-width: 768px){
+        body { padding: 20px; }
+        .page-header { padding: 35px 25px; margin-bottom: -30px; }
+        .page-header h1 { font-size: 28px; }
+        .form-card { padding: 50px 25px 30px; }
+        .button-group { flex-direction: column; width: 100%; }
+        .btn-custom { width: 100%; justify-content: center; }
+    }
 </style>
-
 </head>
 <body>
 
 <div class="container form-container">
 
-    <!-- =========================
-    HEADER
-    ========================= -->
-
+    <!-- HEADER -->
     <div class="page-header">
-
-        <h1>
-            Tambah Kegiatan
-        </h1>
-
-        <p>
-            Tambahkan kegiatan terbaru GENBI UIN SSC
-        </p>
-
+        <h1>Tambah Kegiatan</h1>
+        <p>Tambahkan dokumentasi kegiatan terbaru GENBI UIN SSC</p>
     </div>
 
-    <!-- =========================
-    FORM CARD
-    ========================= -->
-
+    <!-- FORM CARD -->
     <div class="form-card">
-
-        <form
-        method="POST"
-        enctype="multipart/form-data">
-
-            <!-- JUDUL -->
+        <form method="POST" enctype="multipart/form-data">
+            
             <div class="mb-4">
-
-                <label class="form-label">
-
-                    Judul Kegiatan
-
-                </label>
-
-                <input
-                type="text"
-                name="judul"
-                class="form-control"
-                placeholder="Masukkan judul kegiatan..."
-                required>
-
+                <label class="form-label">Judul Kegiatan</label>
+                <div class="input-group-custom">
+                    <i class="fa-solid fa-heading"></i>
+                    <input type="text" name="judul" class="form-control" placeholder="Masukkan judul kegiatan..." required>
+                </div>
             </div>
 
-            <!-- DESKRIPSI -->
             <div class="mb-4">
-
-                <label class="form-label">
-
-                    Deskripsi Kegiatan
-
-                </label>
-
-                <textarea
-                name="deskripsi"
-                rows="6"
-                class="form-control"
-                placeholder="Masukkan deskripsi kegiatan..."
-                required></textarea>
-
+                <label class="form-label">Deskripsi Kegiatan</label>
+                <textarea name="deskripsi" rows="5" class="form-control" placeholder="Jelaskan detail kegiatan..." required></textarea>
             </div>
 
-            <!-- ROW -->
             <div class="row">
-
-                <!-- TANGGAL -->
                 <div class="col-md-6 mb-4">
-
-                    <label class="form-label">
-
-                        Tanggal Kegiatan
-
-                    </label>
-
-                    <input
-                    type="date"
-                    name="tanggal"
-                    class="form-control"
-                    required>
-
+                    <label class="form-label">Tanggal Kegiatan</label>
+                    <div class="input-group-custom">
+                        <i class="fa-regular fa-calendar"></i>
+                        <input type="date" name="tanggal" class="form-control" required>
+                    </div>
                 </div>
 
-                <!-- LOKASI -->
                 <div class="col-md-6 mb-4">
-
-                    <label class="form-label">
-
-                        Lokasi Kegiatan
-
-                    </label>
-
-                    <input
-                    type="text"
-                    name="lokasi"
-                    class="form-control"
-                    placeholder="Contoh: Cirebon"
-                    required>
-
+                    <label class="form-label">Lokasi Kegiatan</label>
+                    <div class="input-group-custom">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <input type="text" name="lokasi" class="form-control" placeholder="Contoh: Kampus UIN" required>
+                    </div>
                 </div>
-
             </div>
 
-            <!-- UPLOAD -->
             <div class="mb-4">
-
-                <label class="form-label">
-
-                    Upload Foto Kegiatan
-
-                </label>
-
+                <label class="form-label">Upload Foto Kegiatan</label>
                 <div class="upload-box">
-
                     <i class="fa-solid fa-cloud-arrow-up"></i>
-
-                    <p>
-                        Pilih foto kegiatan terbaik untuk ditampilkan
-                    </p>
-
-                    <input
-                    type="file"
-                    name="gambar"
-                    class="form-control mt-4"
-                    required>
-
+                    <p class="mb-3">Pilih foto resolusi tinggi untuk ditampilkan</p>
+                    <input type="file" name="gambar" class="form-control" accept="image/*" required>
                 </div>
-
             </div>
 
-            <!-- BUTTON -->
             <div class="button-group">
-
-                <!-- SIMPAN -->
-                <button
-                type="submit"
-                name="simpan"
-                class="btn-custom btn-save">
-
-                    <i class="fa-solid fa-floppy-disk"></i>
-
-                    Simpan Kegiatan
-
+                <button type="submit" name="simpan" class="btn-custom btn-save">
+                    <i class="fa-solid fa-floppy-disk"></i> Simpan Kegiatan
                 </button>
-
-                <!-- KEMBALI -->
-                <a
-                href="index.php"
-                class="btn-custom btn-back">
-
-                    <i class="fa-solid fa-arrow-left"></i>
-
-                    Kembali
-
+                <a href="index.php" class="btn-custom btn-back">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali
                 </a>
-
             </div>
 
         </form>
-
     </div>
 
 </div>
+
+<!-- SWEETALERT2 SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<?php if($success): ?>
+<script>
+    Swal.fire({
+        title: "Berhasil!",
+        text: "Data kegiatan berhasil disimpan.",
+        icon: "success",
+        timer: 2000, // Otomatis hilang dalam 2 detik
+        timerProgressBar: true,
+        showConfirmButton: false
+    }).then(() => {
+        // Redirect setelah popup tertutup
+        window.location.href = "index.php";
+    });
+</script>
+<?php endif; ?>
+
+<?php if($error): ?>
+<script>
+    Swal.fire({
+        title: "Gagal!",
+        text: "Terjadi kesalahan saat menyimpan data ke database.",
+        icon: "error",
+        confirmButtonColor: "#004AAD",
+        confirmButtonText: "Tutup"
+    });
+</script>
+<?php endif; ?>
 
 </body>
 </html>
